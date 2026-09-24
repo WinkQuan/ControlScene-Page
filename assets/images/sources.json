@@ -1,0 +1,157 @@
+{
+  "dataset-full.webp": {
+    "source": "figures/FIG1.pdf",
+    "width": 2600,
+    "height": 1463
+  },
+  "dataset.webp": {
+    "source": "figures/FIG1.pdf",
+    "width": 1440,
+    "height": 810
+  },
+  "method-full.webp": {
+    "source": "figures/FIG2.pdf",
+    "width": 2600,
+    "height": 1463
+  },
+  "method.webp": {
+    "source": "figures/FIG2.pdf",
+    "width": 1440,
+    "height": 810
+  },
+  "self-correction-chart-full.webp": {
+    "source": "figures/FIG3.pdf",
+    "width": 2601,
+    "height": 966
+  },
+  "self-correction-chart.webp": {
+    "source": "figures/FIG3.pdf",
+    "width": 1440,
+    "height": 535
+  },
+  "prompt-tuning-chart-full.webp": {
+    "source": "figures/FIG4.pdf",
+    "width": 2601,
+    "height": 966
+  },
+  "prompt-tuning-chart.webp": {
+    "source": "figures/FIG4.pdf",
+    "width": 1440,
+    "height": 535
+  },
+  "scene-results-full.webp": {
+    "source": "figures/FIG5.pdf",
+    "width": 2600,
+    "height": 1463
+  },
+  "scene-results.webp": {
+    "source": "figures/FIG5.pdf",
+    "width": 1440,
+    "height": 810
+  },
+  "layout-correction-full.webp": {
+    "source": "figures/3-6.pdf",
+    "width": 2600,
+    "height": 1839
+  },
+  "layout-correction.webp": {
+    "source": "figures/3-6.pdf",
+    "width": 1440,
+    "height": 1019
+  },
+  "hero.webp": {
+    "source": "figures/FIG2.pdf, high-resolution panorama (image 324)",
+    "width": 1971,
+    "height": 986
+  },
+  "hero-small.webp": {
+    "source": "figures/FIG2.pdf, high-resolution panorama (image 324)",
+    "width": 1100,
+    "height": 550
+  },
+  "social-preview.jpg": {
+    "source": "figures/FIG2.pdf, high-resolution panorama (image 324)",
+    "width": 1200,
+    "height": 600
+  },
+  "guest-room-panorama.webp": {
+    "source": "figures/FIG5.pdf, guest-room, panorama",
+    "width": 590,
+    "height": 264
+  },
+  "guest-room-view-1.webp": {
+    "source": "figures/FIG5.pdf, guest-room, view-1",
+    "width": 502,
+    "height": 264
+  },
+  "guest-room-view-2.webp": {
+    "source": "figures/FIG5.pdf, guest-room, view-2",
+    "width": 638,
+    "height": 264
+  },
+  "guest-room-view-3.webp": {
+    "source": "figures/FIG5.pdf, guest-room, view-3",
+    "width": 476,
+    "height": 264
+  },
+  "family-room-panorama.webp": {
+    "source": "figures/FIG5.pdf, family-room, panorama",
+    "width": 590,
+    "height": 292
+  },
+  "family-room-view-1.webp": {
+    "source": "figures/FIG5.pdf, family-room, view-1",
+    "width": 446,
+    "height": 292
+  },
+  "family-room-view-2.webp": {
+    "source": "figures/FIG5.pdf, family-room, view-2",
+    "width": 646,
+    "height": 292
+  },
+  "family-room-view-3.webp": {
+    "source": "figures/FIG5.pdf, family-room, view-3",
+    "width": 568,
+    "height": 292
+  },
+  "nursery-panorama.webp": {
+    "source": "figures/FIG5.pdf, nursery, panorama",
+    "width": 594,
+    "height": 296
+  },
+  "nursery-view-1.webp": {
+    "source": "figures/FIG5.pdf, nursery, view-1",
+    "width": 470,
+    "height": 296
+  },
+  "nursery-view-2.webp": {
+    "source": "figures/FIG5.pdf, nursery, view-2",
+    "width": 512,
+    "height": 296
+  },
+  "nursery-view-3.webp": {
+    "source": "figures/FIG5.pdf, nursery, view-3",
+    "width": 650,
+    "height": 296
+  },
+  "panorama-baseline-full.webp": {
+    "source": "figures/3-7.pdf, baseline",
+    "width": 2200,
+    "height": 1100
+  },
+  "panorama-baseline.webp": {
+    "source": "figures/3-7.pdf, baseline",
+    "width": 1100,
+    "height": 550
+  },
+  "panorama-corrected-full.webp": {
+    "source": "figures/3-7.pdf, corrected",
+    "width": 2200,
+    "height": 1100
+  },
+  "panorama-corrected.webp": {
+    "source": "figures/3-7.pdf, corrected",
+    "width": 1100,
+    "height": 550
+  }
+}
