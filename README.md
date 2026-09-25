@@ -69,7 +69,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 2. 正式发表后，核实并补充 DOI、卷、期、页码；目前这些未知字段均省略。
 3. 修改指标时，同时更新三个指标概览和六行实验表，并与论文逐项核对。
 4. 更新 Paper PDF 时同步修改下载大小。替换场景图片时同步更新图注、替代文字、尺寸和 `sources.json`。
-5. 代码入口使用 <https://github.com/SNOW-delala/ControlScene>。LayoutVerse-20K 入口来自该仓库 README，指向百度网盘，提取码为 `zwhq`。更新时应同步首屏和数据集分区的链接。
+5. 代码入口使用 <https://github.com/WinkQuan/ControlScene>。LayoutVerse-20K 入口来自该仓库 README，指向百度网盘，提取码为 `zwhq`。更新时应同步首屏和数据集分区的链接。
 
 ## GitHub Pages 部署
 
