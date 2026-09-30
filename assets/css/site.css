@@ -60,7 +60,10 @@ img { display: block; width: 100%; max-width: 100%; height: auto; }
 /* Publication identity follows the reference template's centered hierarchy. */
 .hero { padding: 88px 0 64px; }
 .hero-copy { text-align: center; }
-.hero h1 { font-size: 48px; line-height: 1.12; letter-spacing: -1.5px; font-weight: 800; margin: 0 auto 30px; max-width: 960px; text-wrap: balance; }
+.hero h1 { font-size: clamp(32px, 3.75vw, 48px); line-height: 1.15; letter-spacing: -.03em; font-weight: 800; margin: 0 auto 30px; max-width: 1120px; text-wrap: balance; }
+@media (min-width: 768px) {
+  .hero h1 .title-line { display: block; }
+}
 .authors { display: flex; justify-content: center; flex-wrap: wrap; gap: 2px 14px; padding: 0; margin: 0 0 18px; list-style: none; color: var(--primary); font-size: 19px; font-weight: 600; }
 .authors li:not(:last-child)::after { content: ","; color: var(--ink); }
 .authors a:hover { text-decoration: underline; text-underline-offset: 4px; }
@@ -204,15 +207,24 @@ tbody .ours { background: #eff6ff; }
 .analysis-card figcaption { margin-top: 16px; font-size: 12px; }
 .analysis-card figcaption > span { display: block; color: var(--primary); }
 
-.citation-box { background: #f1f5f9; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
-.citation-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 13px 23px; border-bottom: 1px solid var(--line); }
-.citation-toolbar > span { font-size: 13px; color: var(--muted); }
-.copy-button { display: inline-flex; align-items: center; gap: 7px; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 12px; color: #475569; background: #fff; font-size: 12px; }
-.copy-button:hover { color: var(--primary); border-color: var(--primary); }
-.copy-button .icon { width: 14px; height: 14px; }
-.citation-box pre { margin: 0; padding: 23px; overflow-x: auto; font: 13px/1.85 ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace; color: #334155; tab-size: 2; }
-.copy-status { min-height: 28px; padding-top: 7px; color: var(--primary); font-size: 13px; }
-.citation-note { font-size: 12px; color: var(--muted); }
+/* A compact citation block with native, selectable syntax highlighting. */
+.citation-section > .container { max-width: 800px; }
+.citation-section .section-heading { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px 20px; text-align: left; margin-bottom: 24px; }
+.citation-section .section-heading h2 { padding-bottom: 0; }
+.citation-section .section-heading h2::after { display: none; }
+.citation-section .section-lead { grid-column: 1 / -1; margin: 0; font-size: 15px; }
+.citation-box { background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.copy-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; border: 1px solid #cbd5e1; border-radius: 999px; padding: 9px 16px; color: #475569; background: #fff; font-size: 13px; font-weight: 500; white-space: nowrap; transition: color 180ms ease, border-color 180ms ease, background 180ms ease; }
+.copy-button:hover { color: var(--primary); border-color: #93b4f5; background: #eff6ff; }
+.copy-button .icon { width: 16px; height: 16px; }
+.citation-box pre { margin: 0; padding: 24px 28px; overflow-x: auto; font: 13px/1.75 "SFMono-Regular", Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; color: #334155; tab-size: 2; }
+.citation-box code { font: inherit; }
+.bibtex-type { color: #7c3aed; }
+.bibtex-key { color: #1d4ed8; }
+.bibtex-field { color: #0e7490; }
+.copy-status { color: var(--primary); font-size: 13px; }
+.copy-status:not(:empty) { margin-top: 12px; }
+.citation-note { margin-top: 16px; font-size: 12px; line-height: 1.75; color: var(--muted); }
 
 .site-footer { border-top: 1px solid var(--line); background: #fff; padding: 42px 0; }
 .footer-inner { text-align: center; color: var(--muted); font-size: 13px; line-height: 1.85; }
@@ -237,7 +249,6 @@ tbody .ours { background: #eff6ff; }
 #lightbox-caption { padding: 12px 20px 15px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); }
 
 @media (max-width: 1000px) {
-  .hero h1 { font-size: 42px; }
   .hero { padding-top: 98px; }
   .contents-menu { right: 20px; top: 20px; }
   .authors { font-size: 17px; }
@@ -321,11 +332,11 @@ tbody .ours { background: #eff6ff; }
   .analysis-heading h3 { font-size: 18px; }
   .analysis-heading p { font-size: 13px; }
   .analysis-card .image-link { margin-top: 17px; }
-  .citation-toolbar { padding: 11px 14px; gap: 10px; }
-  .citation-toolbar > span { font-size: 11px; }
-  .copy-button { font-size: 11px; padding: 7px 9px; }
-  .citation-box pre { font-size: 11px; padding: 20px 15px; }
-  .citation-note { font-size: 11px; }
+  .citation-section .section-heading { gap: 10px 12px; margin-bottom: 20px; }
+  .citation-section .section-lead { font-size: 14px; }
+  .copy-button { min-height: 44px; font-size: 12px; padding: 9px 13px; }
+  .citation-box pre { font-size: 12px; padding: 20px 18px; }
+  .citation-note { font-size: 12px; }
   .site-footer { padding: 32px 0; }
   .footer-inner { font-size: 12px; }
   .lightbox { width: calc(100vw - 20px); max-height: calc(100dvh - 24px); border-radius: 8px; }
