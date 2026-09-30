@@ -95,29 +95,118 @@
     });
   }
 
-  // Highlight the current research section; the correction section belongs to Results.
-  const navigation = [...document.querySelectorAll(".site-header nav a")];
-  const targets = navigation.map((link) => ({ link, section: document.querySelector(link.hash) }));
-  let pending = false;
-  const updateNavigation = () => {
-    pending = false;
-    const offset = document.querySelector(".site-header").getBoundingClientRect().height + 40;
-    let current = null;
-    targets.forEach((target) => {
-      if (target.section.getBoundingClientRect().top <= offset) current = target;
+
+  // A manual carousel enhances, rather than replaces, the static scene articles.
+  const carousel = document.querySelector("#scene-carousel");
+  if (carousel) {
+    const slides = [...carousel.querySelectorAll(".scene-card")];
+    const dots = [...carousel.querySelectorAll("[data-scene]")];
+    const controls = carousel.querySelector(".carousel-controls");
+    const announcement = carousel.querySelector("#carousel-status");
+    let active = 0;
+    let gesture = null;
+    let suppressClickUntil = 0;
+
+    const showScene = (index) => {
+      const focusedInSlide = slides[active].contains(document.activeElement);
+      active = (index + slides.length) % slides.length;
+      slides.forEach((slide, position) => {
+        slide.hidden = position !== active;
+        slide.inert = position !== active;
+        if (position === active) {
+          slide.querySelectorAll("img").forEach((img) => { img.loading = "eager"; });
+        }
+      });
+      dots.forEach((dot, position) => dot.setAttribute("aria-pressed", String(position === active)));
+      announcement.textContent = slides[active].querySelector("h3").textContent + " · " + (active + 1) + " of " + slides.length;
+      carousel.dataset.activeScene = String(active);
+      if (focusedInSlide) carousel.focus({ preventScroll: true });
+    };
+
+    carousel.dataset.enhanced = "true";
+    carousel.setAttribute("role", "region");
+    carousel.setAttribute("aria-roledescription", "carousel");
+    carousel.setAttribute("aria-label", "Generated scene examples");
+    carousel.setAttribute("aria-describedby", "carousel-instructions");
+    carousel.tabIndex = 0;
+    slides.forEach((slide, index) => {
+      slide.setAttribute("role", "group");
+      slide.setAttribute("aria-roledescription", "slide " + (index + 1) + " of " + slides.length);
     });
-    targets.forEach(({ link }) => {
-      if (link === current?.link) link.setAttribute("aria-current", "location");
-      else link.removeAttribute("aria-current");
+    controls.hidden = false;
+    announcement.hidden = false;
+    showScene(0);
+
+    carousel.querySelectorAll("[data-direction]").forEach((button) => {
+      button.addEventListener("click", () => showScene(active + Number(button.dataset.direction)));
     });
-  };
-  const scheduleUpdate = () => {
-    if (!pending) {
-      pending = true;
-      requestAnimationFrame(updateNavigation);
-    }
-  };
-  window.addEventListener("scroll", scheduleUpdate, { passive: true });
-  window.addEventListener("resize", scheduleUpdate, { passive: true });
-  updateNavigation();
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => showScene(Number(dot.dataset.scene)));
+    });
+    carousel.addEventListener("keydown", (event) => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        showScene(active + (event.key === "ArrowRight" ? 1 : -1));
+      }
+    });
+
+    const gallery = carousel.querySelector(".scene-gallery");
+    gallery.addEventListener("pointerdown", (event) => {
+      if (!event.isPrimary) {
+        gesture = null;
+        return;
+      }
+      if (event.pointerType !== "touch" && event.pointerType !== "pen") return;
+      gesture = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    }, { passive: true });
+    window.addEventListener("pointerup", (event) => {
+      if (!gesture || event.pointerId !== gesture.id) return;
+      const dx = event.clientX - gesture.x;
+      const dy = event.clientY - gesture.y;
+      gesture = null;
+      if (Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+        // Suppress only the pointer-generated click following a swipe.
+        // Keyboard activation (detail = 0) remains available.
+        suppressClickUntil = performance.now() + 600;
+        showScene(active + (dx < 0 ? 1 : -1));
+      }
+    }, { passive: true });
+    window.addEventListener("pointercancel", () => { gesture = null; }, { passive: true });
+    gallery.addEventListener("click", (event) => {
+      if (event.detail > 0 && performance.now() < suppressClickUntil) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }, true);
+  }
+
+  const menu = document.querySelector("#contents-menu");
+  if (menu) {
+    const summary = menu.querySelector("summary");
+    menu.querySelectorAll("a[href^='#']").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        menu.open = false;
+        const target = document.querySelector(link.hash);
+        if (target) {
+          target.tabIndex = -1;
+          target.focus({ preventScroll: true });
+        }
+      });
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (menu.open && !menu.contains(event.target)) menu.open = false;
+    }, { passive: true });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menu.open) {
+        event.preventDefault();
+        menu.open = false;
+        summary.focus({ preventScroll: true });
+      }
+    });
+    document.addEventListener("focusin", (event) => {
+      if (menu.open && !menu.contains(event.target)) menu.open = false;
+    });
+  }
 })();
